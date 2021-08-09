@@ -1,9 +1,12 @@
 package com.codeoftheweb.salvo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
@@ -34,6 +37,14 @@ public class Player {
 
     public Player() { } //Constructor vacío, por default lo necesita Java
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Player(String email) {
         this.email = email;   //Solo se la utiliza cuando se quiere instanciar  el programa (ya que empieza con un cierto valor inicial)
     }
@@ -50,7 +61,15 @@ public class Player {
         return email;
     }
 
+    //@JsonIgnore
     public List<Game> getGames() {
         return gamePlayers.stream().map(sub -> sub.getGameID()).collect(toList());
+    }
+
+    public Map<String, Object> makePlayerDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("id" , this.getId());
+        dto.put("player" , this.getEmail());
+        return dto;
     }
 }

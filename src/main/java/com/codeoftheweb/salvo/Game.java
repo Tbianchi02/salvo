@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
@@ -36,6 +38,14 @@ public class Game {
 
     public Game() { }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Game(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
@@ -48,8 +58,16 @@ public class Game {
         this.creationDate = creationDate;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public List<Player> getPlayers() {
         return gamePlayers.stream().map(sub -> sub.getPlayerID()).collect(toList());
+    }
+
+    public Map<String, Object> makeGameDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("id" , this.getId());
+        dto.put("created" , this.getCreationDate());
+        dto.put("gamePlayers", this.getGamePlayers().stream().map(gamePlayers -> gamePlayers.makeGamePlayerDTO()).collect(toList()));
+        return dto;
     }
 }
