@@ -60,14 +60,14 @@ public class Game {
 
     //@JsonIgnore
     public List<Player> getPlayers() {
-        return gamePlayers.stream().map(sub -> sub.getPlayerID()).collect(toList());
+        return gamePlayers.stream().map(player -> player.getPlayerID()).collect(toList());
     }
 
     public Map<String, Object> makeGameDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("id" , this.getId());
         dto.put("created" , this.getCreationDate());
-        dto.put("gamePlayers", this.getGamePlayers().stream().map(gamePlayers -> gamePlayers.makeGamePlayerDTO()).collect(toList()));
+        dto.put("gamePlayers", this.getGamePlayers().stream().map(player -> player.makeGamePlayerDTO()).collect(toList()));
         return dto;
     }
 }

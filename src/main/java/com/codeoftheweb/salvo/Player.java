@@ -37,16 +37,16 @@ public class Player {
 
     public Player() { } //Constructor vacío, por default lo necesita Java
 
+    public Player(String email) {
+        this.email = email;   //Solo se la utiliza cuando se quiere instanciar  el programa (ya que empieza con un cierto valor inicial)
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Player(String email) {
-        this.email = email;   //Solo se la utiliza cuando se quiere instanciar  el programa (ya que empieza con un cierto valor inicial)
     }
 
     public String getEmail() {
@@ -57,13 +57,9 @@ public class Player {
         this.email = email;
     }
 
-    public String toString() {
-        return email;
-    }
-
     //@JsonIgnore
     public List<Game> getGames() {
-        return gamePlayers.stream().map(sub -> sub.getGameID()).collect(toList());
+        return gamePlayers.stream().map(game -> game.getGameID()).collect(toList());
     }
 
     public Map<String, Object> makePlayerDTO() {
