@@ -5,7 +5,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -65,8 +67,10 @@ public class Ship {
         this.locations = locations;
     }
 
-    /*@JsonIgnore
-    public List<GamePlayer> getShips() {
-        return ships.stream().map(gamePlayer -> gamePlayer.getGamePlayerID()).collect(toList());
-    }           REVISAR*/
+    public Map<String, Object> makeShipDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("type" , this.getType());
+        dto.put("locations" , this.getLocations());
+        return dto;
+    }
 }

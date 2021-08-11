@@ -79,15 +79,11 @@ public class GamePlayer {
         this.gameID = gameID;
     }
 
-    /*@JsonIgnore
-    public List<Ship> getShips() {
-        return ships.stream().map(ship -> ship.getGamePlayerID()).collect(toList());
-    }         REVISAR*/
-
     public Map<String, Object> makeGamePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("id" , this.getId());
         dto.put("player", this.getPlayerID().makePlayerDTO());
+        dto.put("ship", this.getShip().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
         return dto;
     }
 }

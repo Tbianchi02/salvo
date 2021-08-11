@@ -64,10 +64,18 @@ public class SalvoApplication {
 			GamePlayer gamePlayer11 = new GamePlayer(game6, player2, LocalDateTime.now().plusHours(5));
 			gamePlayerRepository.save(gamePlayer11);
 
-			Ship ship1 = new Ship("Destroyer", Arrays.asList("B5", "B6", "B7", "B8", "B9"), gamePlayer1);
+			Ship ship1 = new Ship("Carrier", Arrays.asList("B5", "B6", "B7", "B8", "B9"), gamePlayer1);
 			shipRepository.save(ship1);
 			Ship ship2 = new Ship("Cruiser", Arrays.asList("F3", "G3", "H3"), gamePlayer2);
 			shipRepository.save(ship2);
+			Ship ship3 = new Ship("Destroyer", Arrays.asList("A1", "A2"), gamePlayer3);
+			shipRepository.save(ship3);
+			Ship ship4 = new Ship("Submarine", Arrays.asList("B8", "C8", "D8"), gamePlayer4);
+			shipRepository.save(ship4);
+			Ship ship5 = new Ship("Battleship", Arrays.asList("G3", "G4", "G5", "G6"), gamePlayer5);
+			shipRepository.save(ship5);
+			Ship ship6 = new Ship("Cruiser", Arrays.asList("E7", "F7", "G7"), gamePlayer6);
+			shipRepository.save(ship6);
 		};
 	}
 }
