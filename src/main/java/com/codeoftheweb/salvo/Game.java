@@ -20,7 +20,7 @@ public class Game {
     private Long id;
     private LocalDateTime creationDate;
 
-    @OneToMany(mappedBy="gameID", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
 
     public Set<GamePlayer> getGamePlayers() {
@@ -60,7 +60,7 @@ public class Game {
 
     //@JsonIgnore
     public List<Player> getPlayers() {
-        return gamePlayers.stream().map(player -> player.getPlayerID()).collect(toList());
+        return gamePlayers.stream().map(player -> player.getPlayer()).collect(toList());
     }
 
     public Map<String, Object> makeGameDTO() {

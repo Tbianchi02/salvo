@@ -19,7 +19,7 @@ public class Player {
     private Long id;            //Definición de instancias
     private String email;
 
-    @OneToMany(mappedBy="playerID", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
 
     public Set<GamePlayer> getGamePlayers() {
@@ -59,7 +59,7 @@ public class Player {
 
     //@JsonIgnore
     public List<Game> getGames() {
-        return gamePlayers.stream().map(game -> game.getGameID()).collect(toList());
+        return gamePlayers.stream().map(game -> game.getGame()).collect(toList());
     }
 
     public Map<String, Object> makePlayerDTO() {

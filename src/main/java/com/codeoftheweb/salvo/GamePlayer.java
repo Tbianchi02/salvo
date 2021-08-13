@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,29 +20,40 @@ public class GamePlayer {
     private LocalDateTime joinDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="playerID")
-    private Player playerID;
+    @JoinColumn(name="player")
+    private Player player;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="gameID")
-    private Game gameID;
+    @JoinColumn(name="game")
+    private Game game;
 
-    @OneToMany(mappedBy="gamePlayerID", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
     Set<Ship> ships;
 
-    public Set<Ship> getShip() {
+    public Set<Ship> getShips() {
         return ships;
     }
 
-    public void setShip(Set<Ship> ship) {
-        this.ships = ship;
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
+
+    @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
+    Set<Salvo> salvoes;
+
+    public Set<Salvo> getSalvoes() {
+        return salvoes;
+    }
+
+    public void setSalvoes(Set<Salvo> salvoes) {
+        this.salvoes = salvoes;
     }
 
     public GamePlayer() { }
 
-    public GamePlayer(Game gameID, Player playerID, LocalDateTime joinDate) {
-        this.gameID = gameID;
-        this.playerID = playerID;
+    public GamePlayer(Game game, Player player, LocalDateTime joinDate) {
+        this.game = game;
+        this.player = player;
         this.joinDate = joinDate;
     }
 
@@ -63,27 +73,36 @@ public class GamePlayer {
         this.joinDate = joinDate;
     }
 
-    public Player getPlayerID() {
-        return playerID;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerID(Player playerID) {
-        this.playerID = playerID;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public Game getGameID() {
-        return gameID;
+    public Game getGame() {
+        return game;
     }
 
-    public void setGameID(Game gameID) {
-        this.gameID = gameID;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Map<String, Object> makeGamePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("id" , this.getId());
-        dto.put("player", this.getPlayerID().makePlayerDTO());
-        dto.put("ship", this.getShip().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
+        dto.put("player", this.getPlayer().makePlayerDTO());
+        return dto;
+    }
+
+    public Map<String, Object>makeGameViewDTO(){        //ver si hace falta cambiar forma: turn, player, location(salvoLocation)
+        Map<String, Object> dto= new LinkedHashMap<>();
+        dto.put("id", this.getGame().getId());
+        dto.put("created", this.getJoinDate());
+        dto.put("gamePlayers", this.getGame().getGamePlayers().stream().map(gamePlayer-> gamePlayer.makeGamePlayerDTO()).collect(toList()));
+        dto.put("ships",this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
+        dto.put("salvo",this.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO()).collect(toList()));
         return dto;
     }
 }

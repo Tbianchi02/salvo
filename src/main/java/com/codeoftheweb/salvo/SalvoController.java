@@ -28,6 +28,6 @@ public class SalvoController {
     @RequestMapping("/game_view/{nn}")
     public Map<String,Object> findGamePlayer(@PathVariable Long nn) {
         GamePlayer gamePlayer = gamePlayerRepository.getById(nn);
-        return gamePlayer.getGameID().makeGameDTO();
+        return gamePlayer.makeGameViewDTO();
     }
 }
