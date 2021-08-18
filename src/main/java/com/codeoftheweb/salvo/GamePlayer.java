@@ -96,13 +96,13 @@ public class GamePlayer {
         return dto;
     }
 
-    public Map<String, Object>makeGameViewDTO(){        //ver si hace falta cambiar forma: turn, player, location(salvoLocation)
+    public Map<String, Object>makeGameViewDTO(){
         Map<String, Object> dto= new LinkedHashMap<>();
         dto.put("id", this.getGame().getId());
         dto.put("created", this.getJoinDate());
         dto.put("gamePlayers", this.getGame().getGamePlayers().stream().map(gamePlayer-> gamePlayer.makeGamePlayerDTO()).collect(toList()));
-        dto.put("ships",this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
-        dto.put("salvo",this.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO()).collect(toList()));
+        dto.put("ships", this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
+        dto.put("salvoes", this.getGame().getGamePlayers().stream().flatMap(gamePlayer -> gamePlayer.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO())).collect(toList()));
         return dto;
     }
 }

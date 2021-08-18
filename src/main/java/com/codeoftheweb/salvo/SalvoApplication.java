@@ -66,9 +66,9 @@ public class SalvoApplication {
 
 			Ship ship1 = new Ship("Carrier", Arrays.asList("B5", "B6", "B7", "B8", "B9"), gamePlayer1);
 			shipRepository.save(ship1);
-			Ship ship2 = new Ship("Cruiser", Arrays.asList("G3", "J3", "I3"), gamePlayer1);
+			Ship ship2 = new Ship("Destroyer", Arrays.asList("G3", "J3", "I3"), gamePlayer1);
 			shipRepository.save(ship2);
-			Ship ship3 = new Ship("Destroyer", Arrays.asList("A1", "A2"), gamePlayer1);
+			Ship ship3 = new Ship("Patrol Boat", Arrays.asList("A1", "A2"), gamePlayer1);
 			shipRepository.save(ship3);
 			Ship ship4 = new Ship("Submarine", Arrays.asList("B8", "C8", "D8"), gamePlayer1);
 			shipRepository.save(ship4);
@@ -76,9 +76,9 @@ public class SalvoApplication {
 			shipRepository.save(ship5);
 			Ship ship6 = new Ship("Carrier", Arrays.asList("A1", "A2", "A3", "A4", "A5"), gamePlayer2);
 			shipRepository.save(ship6);
-			Ship ship7 = new Ship("Cruiser", Arrays.asList("C6", "C7", "C8"), gamePlayer2);
+			Ship ship7 = new Ship("Destroyer", Arrays.asList("C6", "C7", "C8"), gamePlayer2);
 			shipRepository.save(ship7);
-			Ship ship8 = new Ship("Destroyer", Arrays.asList("G1", "H1"), gamePlayer2);
+			Ship ship8 = new Ship("Patrol Boat", Arrays.asList("G1", "H1"), gamePlayer2);
 			shipRepository.save(ship8);
 			Ship ship9 = new Ship("Submarine", Arrays.asList("D6", "E6", "F6"), gamePlayer2);
 			shipRepository.save(ship9);
@@ -86,17 +86,17 @@ public class SalvoApplication {
 			shipRepository.save(ship10);
 			//Agregué 5 barcos para los primeros dos juegadores del juego 1
 
-			Salvo salvo1 = new Salvo("1", Arrays.asList("B5", "H9"), gamePlayer1);
+			Salvo salvo1 = new Salvo(1, Arrays.asList("B5", "H9"), gamePlayer1);
 			salvoRepository.save(salvo1);		//Ver tema ubicación del disparo, el que sea una lista
-			Salvo salvo2 = new Salvo("1", Arrays.asList("A1", "J10"), gamePlayer2);
+			Salvo salvo2 = new Salvo(1, Arrays.asList("A1", "J10"), gamePlayer2);
 			salvoRepository.save(salvo2);
-			Salvo salvo3 = new Salvo("2", Arrays.asList("D3", "D4"), gamePlayer1);
+			Salvo salvo3 = new Salvo(2, Arrays.asList("D3", "D4"), gamePlayer1);
 			salvoRepository.save(salvo3);
-			Salvo salvo4 = new Salvo("2", Arrays.asList("C4", "F1"), gamePlayer2);
+			Salvo salvo4 = new Salvo(2, Arrays.asList("C4", "F1"), gamePlayer2);
 			salvoRepository.save(salvo4);
-			Salvo salvo5 = new Salvo("3", Arrays.asList("F6", "A7"), gamePlayer1);
+			Salvo salvo5 = new Salvo(3, Arrays.asList("F6", "A7"), gamePlayer1);
 			salvoRepository.save(salvo5);
-			Salvo salvo6 = new Salvo("3", Arrays.asList("H2", "E8"), gamePlayer2);
+			Salvo salvo6 = new Salvo(3, Arrays.asList("H2", "E8"), gamePlayer2);
 			salvoRepository.save(salvo6);
 			//Agregué 3 turnos para el juego 1 y elegí 2 tiros por cada uno
 		};

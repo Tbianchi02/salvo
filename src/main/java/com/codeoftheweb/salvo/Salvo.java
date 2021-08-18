@@ -8,16 +8,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 @Entity
 public class Salvo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-    private String turn;
+    private int turn;
 
     @ElementCollection
-    @Column(name="salvoLocations")
+    @Column(name="locations")
     private List<String> salvoLocations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,7 +28,7 @@ public class Salvo {
 
     public Salvo() { }
 
-    public Salvo(String turn, List<String> salvoLocations, GamePlayer gamePlayer) {
+    public Salvo(int turn, List<String> salvoLocations, GamePlayer gamePlayer) {
         this.turn = turn;
         this.salvoLocations = salvoLocations;
         this.gamePlayer = gamePlayer;
@@ -40,11 +42,11 @@ public class Salvo {
         this.id = id;
     }
 
-    public String getTurn() {
+    public int getTurn() {
         return turn;
     }
 
-    public void setTurn(String turn) {
+    public void setTurn(int turn) {
         this.turn = turn;
     }
 
@@ -67,7 +69,8 @@ public class Salvo {
     public Map<String, Object> makeSalvoDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("turn" , this.getTurn());
-        dto.put("salvoLocations" , this.getSalvoLocations());
+        dto.put("player" , this.getGamePlayer().getPlayer().getId());
+        dto.put("locations" , this.getSalvoLocations());
         return dto;
     }
 }
