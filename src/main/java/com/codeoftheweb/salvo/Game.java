@@ -31,8 +31,19 @@ public class Game {
         this.gamePlayers = gamePlayers;
     }
 
+    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
+    Set<Score> scores;
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
+    }
+
     /*public void addGamePlayer(GamePlayer gamePlayer) {
-        gamePlayer.setGameID(this);
+        gamePlayer.setPlayerID(this);
         gamePlayers.add(gamePlayer);
     }*/
 
@@ -65,9 +76,14 @@ public class Game {
 
     public Map<String, Object> makeGameDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
-        dto.put("id" , this.getId());
-        dto.put("created" , this.getCreationDate());
+        dto.put("id", this.getId());
+        dto.put("created", this.getCreationDate());
         dto.put("gamePlayers", this.getGamePlayers().stream().map(player -> player.makeGamePlayerDTO()).collect(toList()));
-        return dto;
+        //dto.put("score", this.getScores().stream().map(score -> score.makeScoreDTO()).collect(toList())); Esto funciona sin los métodos más complicados -> "manera fácil"
+        dto.put("scores", this.getGamePlayers().stream().map(gamePlayer -> {
+            if(gamePlayer.getScore().isPresent()){ return gamePlayer.getScore().get().makeScoreDTO(); }
+            else { return "No finalizado"; }
+        }));
+        return dto; //Esto funciona con los métodos más complicados -> "manera difícil"
     }
 }

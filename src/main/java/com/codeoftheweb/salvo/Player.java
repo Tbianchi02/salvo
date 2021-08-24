@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -28,6 +25,17 @@ public class Player {
 
     public void setGamePlayers(Set<GamePlayer> gamePlayers) {
         this.gamePlayers = gamePlayers;
+    }
+
+    @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
+    Set<Score> scores;
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 
     /*public void addGamePlayer(GamePlayer gamePlayer) {
@@ -62,10 +70,14 @@ public class Player {
         return gamePlayers.stream().map(game -> game.getGame()).collect(toList());
     }
 
+    public Optional<Score> getScore(Game game){
+        return this.getScores().stream().filter(score -> score.getGame().getId().equals(game.getId())).findFirst();
+    }
+
     public Map<String, Object> makePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
-        dto.put("id" , this.getId());
-        dto.put("email" , this.getEmail());
+        dto.put("id", this.getId());
+        dto.put("email", this.getEmail());
         return dto;
     }
 }

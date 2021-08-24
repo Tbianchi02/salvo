@@ -16,7 +16,7 @@ public class SalvoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository) {
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
 		return (args) -> {		//Escribir ejemplos
 			Player player1 = new Player("tomas.bianchi.02@gmail.com");
 			playerRepository.save(player1);
@@ -87,7 +87,7 @@ public class SalvoApplication {
 			//Agregué 5 barcos para los primeros dos juegadores del juego 1
 
 			Salvo salvo1 = new Salvo(1, Arrays.asList("B5", "H9"), gamePlayer1);
-			salvoRepository.save(salvo1);		//Ver tema ubicación del disparo, el que sea una lista
+			salvoRepository.save(salvo1);
 			Salvo salvo2 = new Salvo(1, Arrays.asList("A1", "J10"), gamePlayer2);
 			salvoRepository.save(salvo2);
 			Salvo salvo3 = new Salvo(2, Arrays.asList("D3", "D4"), gamePlayer1);
@@ -99,6 +99,15 @@ public class SalvoApplication {
 			Salvo salvo6 = new Salvo(3, Arrays.asList("H2", "E8"), gamePlayer2);
 			salvoRepository.save(salvo6);
 			//Agregué 3 turnos para el juego 1 y elegí 2 tiros por cada uno
+
+			Score score1 = new Score(0f, LocalDateTime.now(), player1, game1);
+			scoreRepository.save(score1);
+			Score score2 = new Score(1f, LocalDateTime.now(), player2, game1);
+			scoreRepository.save(score2);
+			Score score3 = new Score(0.5f, LocalDateTime.now(), player1, game1);
+			scoreRepository.save(score3);
+			Score score4 = new Score(0.5f, LocalDateTime.now(), player2, game1);
+			scoreRepository.save(score4);
 		};
 	}
 }

@@ -17,7 +17,7 @@ public class Ship {
     private String type;
 
     @ElementCollection
-    @Column(name="locations")
+    @Column(name="shipLocations")       //ver si hace falta cambiarlo a locations
     private List<String> shipLocations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -66,8 +66,8 @@ public class Ship {
 
     public Map<String, Object> makeShipDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
-        dto.put("type" , this.getType());
-        dto.put("locations" , this.getShipLocations());
+        dto.put("type", this.getType());
+        dto.put("locations", this.getShipLocations());
         return dto;
     }
 }
