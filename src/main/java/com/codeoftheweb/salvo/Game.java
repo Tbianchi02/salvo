@@ -82,7 +82,7 @@ public class Game {
         //dto.put("score", this.getScores().stream().map(score -> score.makeScoreDTO()).collect(toList())); Esto funciona sin los métodos más complicados -> "manera fácil"
         dto.put("scores", this.getGamePlayers().stream().map(gamePlayer -> {
             if(gamePlayer.getScore().isPresent()){ return gamePlayer.getScore().get().makeScoreDTO(); }
-            else { return "No finalizado"; }
+            else { return "No finalizado"; }    //En caso de que no haya resultados de algunos juegos
         }));
         return dto; //Esto funciona con los métodos más complicados -> "manera difícil"
     }

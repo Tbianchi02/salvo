@@ -14,7 +14,8 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;            //Definición de instancias
-    private String email;
+    private String userName;
+    private String password;
 
     @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
@@ -45,8 +46,9 @@ public class Player {
 
     public Player() { } //Constructor vacío, por default lo necesita Java
 
-    public Player(String email) {
-        this.email = email;   //Solo se la utiliza cuando se quiere instanciar  el programa (ya que empieza con un cierto valor inicial)
+    public Player(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
     }
 
     public Long getId() {
@@ -57,12 +59,20 @@ public class Player {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     //@JsonIgnore
@@ -77,7 +87,7 @@ public class Player {
     public Map<String, Object> makePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<>();
         dto.put("id", this.getId());
-        dto.put("email", this.getEmail());
+        dto.put("email", this.getUserName());
         return dto;
     }
 }
