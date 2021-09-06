@@ -17,6 +17,14 @@ public class GamePlayer {
     private Long id;
     private LocalDateTime joinDate;
 
+    @ElementCollection
+    @Column(name="selfHits")
+    private List<String> self = new ArrayList<>();
+
+    @ElementCollection
+    @Column(name="opponentHits")
+    private List<String> opponent = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="player")
     private Player player;
@@ -102,9 +110,18 @@ public class GamePlayer {
         Map<String, Object> dto= new LinkedHashMap<>();
         dto.put("id", this.getGame().getId());
         dto.put("created", this.getJoinDate());
+        dto.put("gameState", "PLACESHIPS");
         dto.put("gamePlayers", this.getGame().getGamePlayers().stream().map(gamePlayer-> gamePlayer.makeGamePlayerDTO()).collect(toList()));
         dto.put("ships", this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
         dto.put("salvoes", this.getGame().getGamePlayers().stream().flatMap(gamePlayer -> gamePlayer.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO())).collect(toList()));
+        dto.put("hits", this.makeHitsDTO());
+        return dto;
+    }
+
+    public Map<String, Object>makeHitsDTO(){
+        Map<String, Object> dto= new LinkedHashMap<>();
+        dto.put("self", self);
+        dto.put("opponent", opponent);
         return dto;
     }
 }

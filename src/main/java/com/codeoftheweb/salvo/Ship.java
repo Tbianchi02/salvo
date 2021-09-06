@@ -17,7 +17,7 @@ public class Ship {
     private String type;
 
     @ElementCollection
-    @Column(name="shipLocations")       //ver si hace falta cambiarlo a locations
+    @Column(name="shipLocations")
     private List<String> shipLocations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
