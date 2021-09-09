@@ -166,42 +166,62 @@ body {
 
 .carrierHor {
     background-image: url(../img/carrierhor.png);
+    background-size: 80% 100%;
+    background-position: center;
 }
 
 .carrierVer {
     background-image: url(../img/carrierver.png);
+    background-size: 100% 80%;
+    background-position: center;
 }
 
 .battleshipHor {
     background-image: url(../img/battleshiphor.png);
+    background-size: 85% 100%;
+    background-position: center;
 }
 
 .battleshipVer {
     background-image: url(../img/battleshipver.png);
+    background-size: 100% 85%;
+    background-position: center;
 }
 
 .submarineHor {
     background-image: url(../img/submarinehor.png);
+    background-size: 66% 100%;
+    background-position: center;
 }
 
 .submarineVer {
     background-image: url(../img/submarinever.png);
+    background-size: 100% 66%;
+    background-position: center;
 }
 
 .destroyerHor {
     background-image: url(../img/destroyerhor.png);
+    background-size: 80% 100%;
+    background-position: center;
 }
 
 .destroyerVer {
     background-image: url(../img/destroyerver.png);
+    background-size: 100% 80%;
+    background-position: center;
 }
 
 .patrolboatHor {
     background-image: url(../img/patrolboathor.png);
+    background-size: 70% 90%;
+    background-position: center;
 }
 
 .patrolboatVer {
     background-image: url(../img/patrolboatver.png);
+    background-size: 90% 70%;
+    background-position: center;
 }
 
 .sidebar {
@@ -214,13 +234,16 @@ body {
 .gridShips {
     width: 451px;
     height: 451px;
-    background-image: url(../img/backships.gif);
+    background-image: url(../img/backships.jpg);
     margin: 0 auto;
     background-size: cover;
+    background-position: center;
 }
 
 .backShipPlacement {
-    background-image: url(../img/backshipplacement.gif);
+    background-image: url(../img/backshipplacement.jpg);
+    background-size: cover;
+    background-position: center;
 }
 .title {
     text-align: center;
@@ -491,14 +514,14 @@ button:focus {
 }
 
 .selfTable {
-    background-image: url(../img/backshipplacement.gif);
+    background-image: url(../img/backshipplacement.jpg);
     opacity: 0.9;
     color: #888888;
     font-size: 0.8em;
 }
 
 .oppTable {
-    background-image: url(../img/backships.gif);
+    background-image: url(../img/backships.jpg);
     opacity: 0.9;
     color: #d8dce0;
     font-size: 0.8em;

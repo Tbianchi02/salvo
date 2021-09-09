@@ -10,10 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -29,6 +26,9 @@ public class SalvoController {
 
     @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    private ShipRepository shipRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -98,20 +98,89 @@ public class SalvoController {
 
     @RequestMapping("/game_view/{nn}")
     public ResponseEntity<Map<String,Object>> findGamePlayer(@PathVariable Long nn, Authentication authentication) {
-        GamePlayer gamePlayer = gamePlayerRepository.findById(nn).get();
-        if (gamePlayer.getPlayer().getId() != playerRepository.findByUserName(authentication.getName()).getId()) {
-            return new ResponseEntity<>(makeMap("error", "No hacer trampa, programador pilluelo"), HttpStatus.UNAUTHORIZED);
+        Optional<GamePlayer> gamePlayer = gamePlayerRepository.findById(nn);
+        if (gamePlayer.isEmpty()) {
+            return new ResponseEntity<>(makeMap("error", "No existe el gamePlayer"), HttpStatus.UNAUTHORIZED);
         }
         else {
-            return new ResponseEntity<>(gamePlayer.makeGameViewDTO(), HttpStatus.ACCEPTED);
+            if (gamePlayer.get().getPlayer().getId() != playerRepository.findByUserName(authentication.getName()).getId()) {
+                return new ResponseEntity<>(makeMap("error", "No hacer trampa, programador pilluelo"), HttpStatus.UNAUTHORIZED);
+            }
+            else {
+                return new ResponseEntity<>(gamePlayer.get().makeGameViewDTO(), HttpStatus.ACCEPTED);
+            }
         }
+    }
+
+    @RequestMapping("/games/players/{gamePlayerId}/ships")
+    public ResponseEntity<Map<String,Object>> getShips(@PathVariable Long gamePlayerId, Authentication authentication) {
+        Optional<GamePlayer> gamePlayer = gamePlayerRepository.findById(gamePlayerId);
+        if (isGuest(authentication)) {
+            return new ResponseEntity<>(makeMap("error", "Inicie sesión para continuar"), HttpStatus.UNAUTHORIZED);
+        }
+        if (gamePlayer.isEmpty()) {
+            return new ResponseEntity<>(makeMap("error", "No existe el gamePlayer"), HttpStatus.UNAUTHORIZED);
+        }
+        if (playerRepository.findByUserName(authentication.getName()).getGamePlayers().stream().noneMatch(gp -> gp.equals(gamePlayer.get()))) {
+            return new ResponseEntity<>(makeMap("error", "Al player no le corresponde al gamePlayer"), HttpStatus.UNAUTHORIZED);
+        }
+        if (shipRepository.findByGamePlayer(gamePlayer.get()).isEmpty()) {
+            return new ResponseEntity<>(makeMap("error", "No ubicaste los barcos"), HttpStatus.FORBIDDEN);
+        }
+        if (gamePlayer.get().getShips().size() == 0) {
+            return new ResponseEntity<>(makeMap("error", "No colocaste todos los barcos"), HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(makeMap("ships", gamePlayer.get().getShips().stream().map(Ship::makeShipDTO).collect(toList())), HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("/games/players/{gamePlayerId}/ships")
+    public ResponseEntity<Map<String,Object>> saveShips(@PathVariable Long gamePlayerId, Authentication authentication, @RequestBody List<Ship> ships) {
+        Optional<GamePlayer> gamePlayer = gamePlayerRepository.findById(gamePlayerId);
+        if (isGuest(authentication)) {
+            return new ResponseEntity<>(makeMap("error", "Inicie sesión para continuar"), HttpStatus.UNAUTHORIZED);
+        }
+        if (gamePlayer.isEmpty()) {
+            return new ResponseEntity<>(makeMap("error", "No existe el gamePlayer"), HttpStatus.UNAUTHORIZED);
+        }
+        if (playerRepository.findByUserName(authentication.getName()).getGamePlayers().stream().noneMatch(gp -> gp.equals(gamePlayer.get()))) {
+            return new ResponseEntity<>(makeMap("error", "Al player no le corresponde al gamePlayer"), HttpStatus.UNAUTHORIZED);
+        }
+        if (ships.size() != 5) {
+            return new ResponseEntity<>(makeMap("error", "Se necesitan 5 barcos para jugar"), HttpStatus.FORBIDDEN);
+        }
+        if (gamePlayer.get().getShips().size() != 0) {
+            return new ResponseEntity<>(makeMap("error", "Ya colocaste todos los barcos"), HttpStatus.FORBIDDEN);
+        }
+        for (Ship newShip : ships) {
+            if (newShip.getType().equals("carrier") && newShip.getShipLocations().size() != 5) {
+                return new ResponseEntity<>(makeMap("error", "Carrier debe ocupar 5 lugares"), HttpStatus.FORBIDDEN);
+            }
+            if (newShip.getType().equals("battleship") && newShip.getShipLocations().size() != 4) {
+                return new ResponseEntity<>(makeMap("error", "Battleship debe ocupar 4 lugares"), HttpStatus.FORBIDDEN);
+            }
+            if (newShip.getType().equals("submarine") && newShip.getShipLocations().size() != 3) {
+                return new ResponseEntity<>(makeMap("error", "Submarine debe ocupar 3 lugares"), HttpStatus.FORBIDDEN);
+            }
+            if (newShip.getType().equals("destroyer") && newShip.getShipLocations().size() != 3) {
+                return new ResponseEntity<>(makeMap("error", "Destroyer debe ocupar 3 lugares"), HttpStatus.FORBIDDEN);
+            }
+            if (newShip.getType().equals("patrolboat") && newShip.getShipLocations().size() != 2) {
+                return new ResponseEntity<>(makeMap("error", "Patrol Boat debe ocupar 2 lugares"), HttpStatus.FORBIDDEN);
+            }
+        }
+        for (Ship newShip : ships) {
+            newShip.setGamePlayer(gamePlayer.get());
+            shipRepository.save(newShip);
+        }
+        return new ResponseEntity<>(makeMap("OK", "Son un groso, barcos colocados"), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/players")
     //@RequestMapping(path = "/players", method = RequestMethod.POST)
+    //RequestMapping es por default un GET
     public ResponseEntity<Map<String, Object>> createUser(@RequestParam String email, @RequestParam String password) {
         if (email.isEmpty()) {
-            return new ResponseEntity<>(makeMap("error", "No se ingresó nombre"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(makeMap("error", "No se ingresó nombre del usuario"), HttpStatus.FORBIDDEN);
         }
         Player player = playerRepository.findByUserName(email);
         if (player != null) {
