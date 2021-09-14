@@ -422,42 +422,42 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
     hitsArray.forEach(function (playTurn) {
         let hitsReport = "";
         if (playTurn.damages.carrierHits > 0){
-            hitsReport += "Carrier " + addDamagesIcons(playTurn.damages.carrierHits, "hit") + " ";
+            hitsReport += "Star Destroyer " + addDamagesIcons(playTurn.damages.carrierHits, "hit") + " ";
             if (playTurn.damages.carrier === 5){
-                hitsReport += "SUNK! ";
+                hitsReport += "DEMOLISHED! ";
                 $(playerTag + 'carrierIcon').html('<img src="img/carriersunk.png">');
                 shipsAfloat--;
             }
         }
 
         if (playTurn.damages.battleshipHits > 0){
-            hitsReport += "Battleship " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
+            hitsReport += "Millennium Falcon " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
             if (playTurn.damages.battleship === 4){
-                hitsReport += "SUNK! ";
+                hitsReport += "DEMOLISHED! ";
                 $(playerTag + 'battleshipIcon').html('<img src="img/battleshipsunk.png">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.submarineHits > 0){
-            hitsReport += "Submarine " + addDamagesIcons(playTurn.damages.submarineHits, "hit") + " ";
+            hitsReport += "X-Wing " + addDamagesIcons(playTurn.damages.submarineHits, "hit") + " ";
             if (playTurn.damages.submarine === 3){
-                hitsReport += "SUNK! ";
+                hitsReport += "DEMOLISHED! ";
                 $(playerTag + 'submarineIcon').html('<img src="img/submarinesunk.png">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.destroyerHits > 0){
-            hitsReport += "Destroyer " + addDamagesIcons(playTurn.damages.destroyerHits, "hit") + " ";
+            hitsReport += "Y-Wing " + addDamagesIcons(playTurn.damages.destroyerHits, "hit") + " ";
             if (playTurn.damages.destroyer === 3){
-                hitsReport += "SUNK! ";
+                hitsReport += "DEMOLISHED! ";
                 $(playerTag + 'destoyerIcon').html('<img src="img/destoyersunk.png">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.patrolboatHits > 0){
-            hitsReport += "Patrol Boat " + addDamagesIcons(playTurn.damages.patrolboatHits, "hit") + " ";
+            hitsReport += "Jedi Starfighter " + addDamagesIcons(playTurn.damages.patrolboatHits, "hit") + " ";
             if (playTurn.damages.patrolboat === 2){
-                hitsReport += "SUNK! ";
+                hitsReport += "DEMOLISHED! ";
                 $(playerTag + 'patrolboatIcon').html('<img src="img/patrolboatsunk.png">');
                 shipsAfloat--;
             }
