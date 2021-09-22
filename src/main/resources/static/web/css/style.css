@@ -1,6 +1,8 @@
 body {
     background: url(../img/back2.jpg);
     font-family: 'Dosis', sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed
 }
 
 .bannerTitle {
@@ -9,6 +11,8 @@ body {
     background: #00000038;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .blockInline {
@@ -30,7 +34,9 @@ body {
     text-transform: uppercase;
     color: #dee2e6;
     font-size: 1.6em;
-    font-weight: 200;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 .labelGameBig {
     color: #f8f9fa;
@@ -45,8 +51,10 @@ body {
 
 .gridTopLabel {
     text-transform: uppercase;
-    font-weight: 600;
     margin: 0;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .shipPoslabel {
@@ -147,6 +155,9 @@ body {
 
 .textCenter {
     text-align: center;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 /*SHIP PLACEMENT*/
@@ -271,10 +282,16 @@ body {
     font-size: 1.3em;
     font-weight: 600;
     color: #ffc107;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .gameStateLabel {
     color: #dee2e6;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .divTableRow {
@@ -286,7 +303,7 @@ body {
 }
 
 .divTableCell, .divTableHead {
-    border: 1px dashed #6786ff;
+    border: 1px dashed #545b62;
     border-left-width: 0;
     border-top-width: 0;
     display: table-cell;
@@ -362,11 +379,16 @@ button:focus {
 .table td, .table th {
     vertical-align: middle;
     padding: .25rem;
-    font-weight: 200;
+    font-weight: 500;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .3px;
 }
 
 .form-inline > * {
-    margin: 3px 6px !important;
+    margin: 3px 3px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .3px;
+    font-weight: bold;
 }
 
 #login-form {
@@ -407,11 +429,17 @@ button:focus {
 
 .currentPlayerContainer {
     text-align: center;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 #currentPlayer {
     font-size: 1.2em;
     font-weight: 600;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .placeshipsInstructions {
@@ -515,6 +543,7 @@ button:focus {
 
 .selfTable {
     background-image: url(../img/backshipplacement.jpg);
+    background-position: center;
     opacity: 0.9;
     color: #888888;
     font-size: 0.8em;
@@ -522,13 +551,14 @@ button:focus {
 
 .oppTable {
     background-image: url(../img/backships.jpg);
+    background-position: left;
     opacity: 0.9;
-    color: #d8dce0;
+    color: #545b62;
     font-size: 0.8em;
 }
 
 .selfTdCell {
-    border: 1px dashed #eab105;
+    border: 1px dashed #545b62;
     border-left-width: 0;
     border-top-width: 0;
 

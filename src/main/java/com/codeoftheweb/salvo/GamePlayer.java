@@ -17,14 +17,6 @@ public class GamePlayer {
     private Long id;
     private LocalDateTime joinDate;
 
-    @ElementCollection
-    @Column(name="selfHits")
-    private List<String> self = new ArrayList<>();
-
-    @ElementCollection
-    @Column(name="opponentHits")
-    private List<String> opponent = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="player")
     private Player player;
@@ -45,6 +37,7 @@ public class GamePlayer {
     }
 
     @OneToMany(mappedBy="gamePlayer", fetch=FetchType.EAGER)
+    @OrderBy
     Set<Salvo> salvoes;
 
     public Set<Salvo> getSalvoes() {
@@ -114,14 +107,117 @@ public class GamePlayer {
         dto.put("gamePlayers", this.getGame().getGamePlayers().stream().map(gamePlayer-> gamePlayer.makeGamePlayerDTO()).collect(toList()));
         dto.put("ships", this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
         dto.put("salvoes", this.getGame().getGamePlayers().stream().flatMap(gamePlayer -> gamePlayer.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO())).collect(toList()));
-        dto.put("hits", this.makeHitsDTO());
+        dto.put("hits", makeHitsDTO());
         return dto;
     }
 
     public Map<String, Object>makeHitsDTO(){
         Map<String, Object> dto= new LinkedHashMap<>();
-        dto.put("self", self);
-        dto.put("opponent", opponent);
+        GamePlayer opponent = getOpponent();
+        if(opponent == null){
+            dto.put("self", new ArrayList<>());
+            dto.put("opponent", new ArrayList<>());
+        }
+        else {
+            dto.put("self", this.makeListHits());
+            dto.put("opponent", opponent.makeListHits());
+        }
         return dto;
+    }
+
+    public GamePlayer getOpponent(){
+        GamePlayer opponent = this.getGame().getGamePlayers().stream().filter(gp -> !gp.getId().equals(this.getId())).findFirst().orElse(null);
+        return opponent;
+    }
+
+    public List<Map<String, Object>>makeListHits(){
+        List<Map<String, Object>> listHits= new ArrayList<>();
+        Ship carrier = this.getShips().stream().filter(s -> s.getType().equals("carrier")).findFirst().get();
+        List<String> carrierLocations = carrier.getShipLocations();
+        Ship battleship = this.getShips().stream().filter(s -> s.getType().equals("battleship")).findFirst().get();
+        List<String> battleshipLocations = battleship.getShipLocations();
+        Ship submarine = this.getShips().stream().filter(s -> s.getType().equals("submarine")).findFirst().get();
+        List<String> submarineLocations = submarine.getShipLocations();
+        Ship destroyer = this.getShips().stream().filter(s -> s.getType().equals("destroyer")).findFirst().get();
+        List<String> destroyerLocations = destroyer.getShipLocations();
+        Ship patrolboat = this.getShips().stream().filter(s -> s.getType().equals("patrolboat")).findFirst().get();
+        List<String> patrolboatLocations = patrolboat.getShipLocations();
+
+        int carrierTotal = 0;
+        int battleshipTotal = 0;
+        int submarineTotal = 0;
+        int destroyerTotal = 0;
+        int patrolboatTotal = 0;
+
+        for (Salvo salvoes : this.getOpponent().getSalvoes()) {
+            Map<String, Object> hitsTurn= new LinkedHashMap<>();
+
+            int carrierTurn = 0;
+            int battleshipTurn = 0;
+            int submarineTurn = 0;
+            int destroyerTurn = 0;
+            int patrolboatTurn = 0;
+            int missed = salvoes.getSalvoLocations().size();
+
+            List<String> hitLocations= new ArrayList<>();
+            for (String salvoLocation : salvoes.getSalvoLocations()) {
+                if (carrierLocations.contains(salvoLocation)) {
+                    hitLocations.add(salvoLocation);
+                    carrierTotal++;
+                    carrierTurn++;
+                    missed--;
+                }
+                if (battleshipLocations.contains(salvoLocation)) {
+                    hitLocations.add(salvoLocation);
+                    battleshipTotal++;
+                    battleshipTurn++;
+                    missed--;
+                }
+                if (submarineLocations.contains(salvoLocation)) {
+                    hitLocations.add(salvoLocation);
+                    submarineTotal++;
+                    submarineTurn++;
+                    missed--;
+                }
+                if (destroyerLocations.contains(salvoLocation)) {
+                    hitLocations.add(salvoLocation);
+                    destroyerTotal++;
+                    destroyerTurn++;
+                    missed--;
+                }
+                if (patrolboatLocations.contains(salvoLocation)) {
+                    hitLocations.add(salvoLocation);
+                    patrolboatTotal++;
+                    patrolboatTurn++;
+                    missed--;
+                }
+            }
+
+            Map<String, Object> listDamages= new LinkedHashMap<>();
+            listDamages.put("carrierHits", carrierTurn);
+            listDamages.put("battleshipHits", battleshipTurn);
+            listDamages.put("submarineHits", submarineTurn);
+            listDamages.put("destroyerHits", destroyerTurn);
+            listDamages.put("patrolboatHits", patrolboatTurn);
+            listDamages.put("carrier", carrierTotal);
+            listDamages.put("battleship", battleshipTotal);
+            listDamages.put("submarine", submarineTotal);
+            listDamages.put("destroyer", destroyerTotal);
+            listDamages.put("patrolboat", patrolboatTotal);
+
+            hitsTurn.put("turn", salvoes.getTurn());
+            hitsTurn.put("hitLocations", hitLocations);
+            hitsTurn.put("damages", listDamages);
+            hitsTurn.put("missed", missed);
+
+            listHits.add(hitsTurn);
+        }
+        return listHits;
+    }
+
+    private Map<String, Object> makeMap(String key, Object value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
     }
 }

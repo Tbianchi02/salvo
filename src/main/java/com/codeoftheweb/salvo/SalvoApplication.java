@@ -82,25 +82,25 @@ public class SalvoApplication {
 			GamePlayer gamePlayer11 = new GamePlayer(game6, player2, LocalDateTime.now().plusHours(5));
 			gamePlayerRepository.save(gamePlayer11);
 
-			Ship ship1 = new Ship("Carrier", Arrays.asList("B5", "B6", "B7", "B8", "B9"), gamePlayer1);
+			Ship ship1 = new Ship("carrier", Arrays.asList("B5", "B6", "B7", "B8", "B9"), gamePlayer1);
 			shipRepository.save(ship1);
-			Ship ship2 = new Ship("Destroyer", Arrays.asList("G3", "J3", "I3"), gamePlayer1);
+			Ship ship2 = new Ship("destroyer", Arrays.asList("G3", "J3", "I3"), gamePlayer1);
 			shipRepository.save(ship2);
-			Ship ship3 = new Ship("Patrol Boat", Arrays.asList("A1", "A2"), gamePlayer1);
+			Ship ship3 = new Ship("patrolboat", Arrays.asList("A1", "A2"), gamePlayer1);
 			shipRepository.save(ship3);
-			Ship ship4 = new Ship("Submarine", Arrays.asList("B8", "C8", "D8"), gamePlayer1);
+			Ship ship4 = new Ship("submarine", Arrays.asList("B8", "C8", "D8"), gamePlayer1);
 			shipRepository.save(ship4);
-			Ship ship5 = new Ship("Battleship", Arrays.asList("G3", "G4", "G5", "G6"), gamePlayer1);
+			Ship ship5 = new Ship("battleship", Arrays.asList("G3", "G4", "G5", "G6"), gamePlayer1);
 			shipRepository.save(ship5);
-			Ship ship6 = new Ship("Carrier", Arrays.asList("A1", "A2", "A3", "A4", "A5"), gamePlayer2);
+			Ship ship6 = new Ship("carrier", Arrays.asList("A1", "A2", "A3", "A4", "A5"), gamePlayer2);
 			shipRepository.save(ship6);
-			Ship ship7 = new Ship("Destroyer", Arrays.asList("C6", "C7", "C8"), gamePlayer2);
+			Ship ship7 = new Ship("destroyer", Arrays.asList("C6", "C7", "C8"), gamePlayer2);
 			shipRepository.save(ship7);
-			Ship ship8 = new Ship("Patrol Boat", Arrays.asList("G1", "H1"), gamePlayer2);
+			Ship ship8 = new Ship("patrolboat", Arrays.asList("G1", "H1"), gamePlayer2);
 			shipRepository.save(ship8);
-			Ship ship9 = new Ship("Submarine", Arrays.asList("D6", "E6", "F6"), gamePlayer2);
+			Ship ship9 = new Ship("submarine", Arrays.asList("D6", "E6", "F6"), gamePlayer2);
 			shipRepository.save(ship9);
-			Ship ship10 = new Ship("Battleship", Arrays.asList("J5", "J6", "J7", "J8"), gamePlayer2);
+			Ship ship10 = new Ship("battleship", Arrays.asList("J5", "J6", "J7", "J8"), gamePlayer2);
 			shipRepository.save(ship10);
 			//Agregué 5 barcos para los primeros dos juegadores del juego 1
 

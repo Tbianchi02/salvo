@@ -42,11 +42,6 @@ public class Game {
         this.scores = scores;
     }
 
-    /*public void addGamePlayer(GamePlayer gamePlayer) {
-        gamePlayer.setPlayerID(this);
-        gamePlayers.add(gamePlayer);
-    }*/
-
     public Game() { }
 
     public Game(LocalDateTime creationDate) {
