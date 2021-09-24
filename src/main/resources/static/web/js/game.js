@@ -425,7 +425,7 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
             hitsReport += "Star Destroyer " + addDamagesIcons(playTurn.damages.carrierHits, "hit") + " ";
             if (playTurn.damages.carrier === 5){
                 hitsReport += "DEMOLISHED! ";
-                $(playerTag + 'carrierIcon').html('<img src="img/carriersunk.png">');
+                $(playerTag + 'carrierIcon').html('<img src="img/carriersunk.png" width="85" height="50">');
                 shipsAfloat--;
             }
         }
@@ -434,7 +434,7 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
             hitsReport += "Millennium Falcon " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
             if (playTurn.damages.battleship === 4){
                 hitsReport += "DEMOLISHED! ";
-                $(playerTag + 'battleshipIcon').html('<img src="img/battleshipsunk.png">');
+                $(playerTag + 'battleshipIcon').html('<img src="img/battleshipsunk.png" width="85" height="65">');
                 shipsAfloat--;
             }
         }
@@ -442,7 +442,7 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
             hitsReport += "X-Wing " + addDamagesIcons(playTurn.damages.submarineHits, "hit") + " ";
             if (playTurn.damages.submarine === 3){
                 hitsReport += "DEMOLISHED! ";
-                $(playerTag + 'submarineIcon').html('<img src="img/submarinesunk.png">');
+                $(playerTag + 'submarineIcon').html('<img src="img/submarinesunk.png" width="80" height="50">');
                 shipsAfloat--;
             }
         }
@@ -450,7 +450,7 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
             hitsReport += "Y-Wing " + addDamagesIcons(playTurn.damages.destroyerHits, "hit") + " ";
             if (playTurn.damages.destroyer === 3){
                 hitsReport += "DEMOLISHED! ";
-                $(playerTag + 'destoyerIcon').html('<img src="img/destoyersunk.png">');
+                $(playerTag + 'destoyerIcon').html('<img src="img/destroyersunk.png" width="80" height="55">');
                 shipsAfloat--;
             }
         }
@@ -458,7 +458,7 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
             hitsReport += "Jedi Starfighter " + addDamagesIcons(playTurn.damages.patrolboatHits, "hit") + " ";
             if (playTurn.damages.patrolboat === 2){
                 hitsReport += "DEMOLISHED! ";
-                $(playerTag + 'patrolboatIcon').html('<img src="img/patrolboatsunk.png">');
+                $(playerTag + 'patrolboatIcon').html('<img src="img/patrolboatsunk.png" width="60" height="45">');
                 shipsAfloat--;
             }
         }

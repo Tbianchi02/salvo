@@ -103,7 +103,7 @@ public class GamePlayer {
         Map<String, Object> dto= new LinkedHashMap<>();
         dto.put("id", this.getGame().getId());
         dto.put("created", this.getJoinDate());
-        dto.put("gameState", "PLACESHIPS");
+        dto.put("gameState", gameState());
         dto.put("gamePlayers", this.getGame().getGamePlayers().stream().map(gamePlayer-> gamePlayer.makeGamePlayerDTO()).collect(toList()));
         dto.put("ships", this.getShips().stream().map(ship -> ship.makeShipDTO()).collect(toList()));
         dto.put("salvoes", this.getGame().getGamePlayers().stream().flatMap(gamePlayer -> gamePlayer.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO())).collect(toList()));
@@ -114,7 +114,7 @@ public class GamePlayer {
     public Map<String, Object>makeHitsDTO(){
         Map<String, Object> dto= new LinkedHashMap<>();
         GamePlayer opponent = getOpponent();
-        if(opponent == null){
+        if(opponent == null || this.getShips().size() == 0){
             dto.put("self", new ArrayList<>());
             dto.put("opponent", new ArrayList<>());
         }
@@ -219,5 +219,83 @@ public class GamePlayer {
         Map<String, Object> map = new HashMap<>();
         map.put(key, value);
         return map;
+    }
+
+    public String gameState() {
+        String gameState = "UNDEFINED";
+        GamePlayer currentPlayer = this;
+        GamePlayer opponent = this.getOpponent();
+
+        GamePlayer player1 = this.getGame().getGamePlayers().stream().min(Comparator.comparing(gp -> gp.getId())).get();
+        GamePlayer player2 = this.getGame().getGamePlayers().stream().max(Comparator.comparing(gp -> gp.getId())).get();
+
+        int player1Turn = player1.getSalvoes().size();
+        int player2Turn = player2.getSalvoes().size();
+
+        if (this.getOpponent() == null) {
+            gameState = "WAITINGFOROPP";
+            return gameState;
+        }
+        if (this.getShips().size() != 5) {
+            gameState = "PLACESHIPS";
+            return gameState;
+        }
+        if (this.getOpponent().getShips().size() == 5) {
+            gameState = "PLAY";
+        }
+        if (this.getId() == player1.getId()){
+            if (this.shipsSunk(opponent, currentPlayer)){
+                if (player1Turn > player2Turn){
+                    gameState =  "WAIT";
+                    return gameState;
+                }
+                else if (this.shipsSunk(currentPlayer,opponent)){
+                    gameState =  "TIE";
+                    return gameState;
+                }
+                else {
+                    gameState =  "WON";
+                    return gameState;
+                }
+            }
+            if (this.shipsSunk(currentPlayer,opponent)){
+                gameState =  "LOST";
+                return gameState;
+            }
+        }
+        else {
+            if(this.shipsSunk(opponent,currentPlayer)){
+                if (this.shipsSunk(currentPlayer,opponent)){
+                    gameState = "TIE";
+                    return gameState;
+                }
+                else {
+                    gameState = "WON";
+                    return gameState;
+                }
+            }
+            if(this.shipsSunk(currentPlayer,opponent)){
+                if (player1Turn == player2Turn){
+                    gameState = "LOST";
+                    return gameState;
+                }
+            }
+        }
+        if ((this.getOpponent().getShips().size() != 5 && this.getOpponent().getShips().size() > 0) || (player1Turn > player2Turn && this.getId() == player1.getId()) || (player1Turn == player2Turn && this.getId() == player2.getId())) {
+            gameState = "WAIT";
+            return gameState;
+        }
+        return gameState;
+    }
+
+    private boolean shipsSunk(GamePlayer gpShips, GamePlayer gpSalvos) {
+        GamePlayer opponent = this.getOpponent();
+
+        if (!gpShips.getShips().isEmpty() && !gpSalvos.getSalvoes().isEmpty()) {
+            return  gpSalvos.getSalvoes().stream().flatMap(salvo -> salvo.getSalvoLocations().stream()).collect(toList())
+                    .containsAll(gpShips.getShips().stream().flatMap(s -> s.getShipLocations().stream())
+                    .collect(toList()));
+        }
+        return false;
     }
 }

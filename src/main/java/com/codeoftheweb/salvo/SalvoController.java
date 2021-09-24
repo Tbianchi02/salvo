@@ -34,6 +34,9 @@ public class SalvoController {
     private SalvoRepository salvoRepository;
 
     @Autowired
+    private ScoreRepository scoreRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private boolean isGuest(Authentication authentication) {
@@ -110,6 +113,18 @@ public class SalvoController {
                 return new ResponseEntity<>(makeMap("error", "No hacer trampa, programador pilluelo"), HttpStatus.UNAUTHORIZED);
             }
             else {
+                if(gamePlayer.get().gameState().equals("WON")){
+                    Score score = new Score(1f,LocalDateTime.now(),gamePlayer.get().getPlayer(),gamePlayer.get().getGame());
+                    scoreRepository.save(score);
+                }
+                else if (gamePlayer.get().gameState().equals("TIE")){
+                    Score score = new Score(0.5f,LocalDateTime.now(),gamePlayer.get().getPlayer(),gamePlayer.get().getGame());
+                    scoreRepository.save(score);
+                }
+                else if (gamePlayer.get().gameState().equals("LOST")){
+                    Score score = new Score(0f,LocalDateTime.now(),gamePlayer.get().getPlayer(),gamePlayer.get().getGame());
+                    scoreRepository.save(score);
+                }
                 return new ResponseEntity<>(gamePlayer.get().makeGameViewDTO(), HttpStatus.ACCEPTED);
             }
         }
@@ -197,7 +212,7 @@ public class SalvoController {
     }
 
     @PostMapping("/games/players/{gamePlayerId}/salvoes")
-    public ResponseEntity<Map<String,Object>> saveSalvo(@PathVariable Long gamePlayerId, Authentication authentication, @RequestBody Salvo salvos) {
+    public ResponseEntity<Map<String,Object>> saveSalvo(@PathVariable Long gamePlayerId, Authentication authentication, @RequestBody Salvo salvoes) {
         Optional<GamePlayer> gamePlayer1 = gamePlayerRepository.findById(gamePlayerId);
         if (isGuest(authentication)) {
             return new ResponseEntity<>(makeMap("error", "Inicie sesión para continuar"), HttpStatus.UNAUTHORIZED);
@@ -212,7 +227,7 @@ public class SalvoController {
         if ((playerRepository.findByUserName(authentication.getName()).getGamePlayers().stream().noneMatch(gp -> gp.equals(gamePlayer1.get())))) {
             return new ResponseEntity<>(makeMap("error", "Al player no le corresponde al gamePlayer"), HttpStatus.UNAUTHORIZED);
         }
-        if ((salvos.getSalvoLocations().size() < 1 || salvos.getSalvoLocations().size() > 5)) {
+        if ((salvoes.getSalvoLocations().size() < 1 || salvoes.getSalvoLocations().size() > 5)) {
             return new ResponseEntity<>(makeMap("error", "Deben haber entre 1 y 5 tiros por turno"), HttpStatus.FORBIDDEN);
         }
         if (gamePlayer1.get().getShips().size() != 5) {
@@ -223,9 +238,9 @@ public class SalvoController {
         }
         if (gamePlayer1.get().getId() < gamePlayer2.get().getId()) {
             if (gamePlayer1.get().getSalvoes().size() == gamePlayer2.get().getSalvoes().size()) {
-                salvos.setGamePlayer(gamePlayer1.get());
-                salvos.setTurn(gamePlayer1.get().getSalvoes().size()+1);
-                salvoRepository.save(salvos);
+                salvoes.setGamePlayer(gamePlayer1.get());
+                salvoes.setTurn(gamePlayer1.get().getSalvoes().size()+1);
+                salvoRepository.save(salvoes);
                 return new ResponseEntity<>(makeMap("OK", "Misiles lanzados"), HttpStatus.CREATED);
             }
             else {
@@ -234,9 +249,9 @@ public class SalvoController {
         }
         else {
             if (gamePlayer1.get().getSalvoes().size() < gamePlayer2.get().getSalvoes().size()) {
-                salvos.setGamePlayer(gamePlayer1.get());
-                salvos.setTurn(gamePlayer1.get().getSalvoes().size()+1);
-                salvoRepository.save(salvos);
+                salvoes.setGamePlayer(gamePlayer1.get());
+                salvoes.setTurn(gamePlayer1.get().getSalvoes().size()+1);
+                salvoRepository.save(salvoes);
                 return new ResponseEntity<>(makeMap("OK", "Misiles lanzados"), HttpStatus.CREATED);
             }
             else {

@@ -2,17 +2,15 @@ body {
     background: url(../img/back2.jpg);
     font-family: 'Dosis', sans-serif;
     background-repeat: no-repeat;
-    background-attachment: fixed
+    background-attachment: fixed;
+    margin-bottom: 10px;
 }
 
 .bannerTitle {
     margin: 15px auto 0;
     text-align: center;
     background: #00000038;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px;
 }
 
 .blockInline {
@@ -22,12 +20,10 @@ body {
 }
 
 #gameStateBlock {
-
     background-color: #212529;
     padding: 3px;
     margin-bottom: 4px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 10px;
 }
 
 .labelGame {
@@ -84,6 +80,7 @@ body {
     background-color: darkorange;
     color: black;
     padding: 10px;
+    margin: 10px
 }
 
 #errorMsg {
@@ -95,6 +92,7 @@ body {
     background-color: forestgreen;
     color: white;
     padding: 10px;
+    margin: 10px
 }
 
 #gamesList {
@@ -112,6 +110,7 @@ body {
     width: 60%;
     margin: 0 auto;
     opacity: 0.9;
+    margin-bottom: 15px;
 }
 
 #currentPlayerName {
@@ -124,14 +123,14 @@ body {
 
 .salvoCell {
     background-image: url(../img/target.png);
-    background-size: cover;
+    background-size: 100%;
     /* background-color: #87cefa00; */
     color: white;
 }
 
 .salvoCellSelf {
     background-image: url(../img/targetself.png);
-    background-size: cover;
+    background-size: 100%;
     /* background-color: #87cefa00; */
     color: #888888;
 }
@@ -139,6 +138,7 @@ body {
 .hitCell {
     background-image: url(../img/hit3.gif);
     background-size: cover;
+    background-position: center;
 }
 
 .verticalCenterFlex {
@@ -370,6 +370,7 @@ button:focus {
     padding: 25px;
     border-radius: 1.5em;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #gameRecordOppTable, #gameRecordSelfTable {
@@ -547,6 +548,7 @@ button:focus {
     opacity: 0.9;
     color: #888888;
     font-size: 0.8em;
+    margin-bottom: 15px;
 }
 
 .oppTable {

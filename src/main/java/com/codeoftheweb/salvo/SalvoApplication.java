@@ -33,7 +33,7 @@ public class SalvoApplication {
 		SpringApplication.run(SalvoApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
 		return (args) -> {		//Escribir ejemplos
 			Player player1 = new Player("j.bauer@ctu.gov", passwordEncoder().encode("24"));
@@ -127,7 +127,8 @@ public class SalvoApplication {
 			Score score4 = new Score(0f, LocalDateTime.now(), player2, game2);
 			scoreRepository.save(score4);
 		};
-	}
+	}*/
+	//Estos datos son hardcodeados, es decir puestos a mano para ir probando las distintas funcionalidades
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
