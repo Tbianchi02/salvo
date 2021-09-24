@@ -1,283 +1,16 @@
-@media (max-width: 576px) {
-    
-    .preCurrentPlayer {
-        display:none !important;
-    }
-
-
-
-}
-
-@font-face {
-      font-family: 'Green_Energy';
-      src: url('fonts/Green_Energy.ttf');
-      font-style: normal;
-      font-weight: normal;
-    }
-
-
-
-body{
-        background: url(https://wallpapercave.com/download/warship-wallpaper-hd-wp2874399)no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        background-attachment: fixed;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        /* width: 100%; */
-        -ms-transform: translateZ(0);
-}
-
-body::-webkit-scrollbar {
-    width: 10px;     /* Tamaño del scroll en vertical */
-    height: 5px;
-    background:#000;     /* Tamaño del scroll en horizontal */
-    /* display: none;  /* Ocultar scroll */
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-body::-webkit-scrollbar-thumb {
-    background: #ffc107;
-    border-radius: 4px;
-}
-
-/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-body::-webkit-scrollbar-thumb:hover {
-    background: #ffc107;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-/* Cambiamos el fondo cuando esté en active */
-body::-webkit-scrollbar-thumb:active {
-    background-color: #ffc107;
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del track */
-body::-webkit-scrollbar-track {
-    background:#000;
-    border-radius: 4px;
-}
-
-/* Cambiamos el fondo cuando esté en active o hover */
-body::-webkit-scrollbar-track:hover, body::-webkit-scrollbar-track:active {
-  background: #000;
-}
-
-    
-
-.btn{
-    transition:2
-}
-
-h1,h2,h3,h4,h5,h6, .movingMsgBig, #gamesList thead tr, #scoreBoard thead tr{
-    font-family: 'Green_Energy' !important;
-    }
-
-.container-fluid {
-    padding:0 !important;
+body {
+    background: url(../img/back2.jpg);
+    font-family: 'Dosis', sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin-bottom: 10px;
 }
 
 .bannerTitle {
-    /* margin: 25px auto 0 !important; */
-}
-
-#loginBlock.row {
-    margin-top: 0px !important;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    background: rgba(0,0,0,0.6);
-    width: 100%;
-    padding: 15px;
-    z-index:99;
-}
-
-#login-form input[type=email], #login-form input[type=password], #login-form input:-internal-autofill-selected 
-{
-    border-color:rgba(0,0,0,0.7);
-    background-color: rgba(0,0,0,0.5) !important;
-    color: #ffc107;
-    transform: translateZ(0);
-}
-
-
-
-
-
-@-webkit-keyframes glow2 {
-  from {
-    box-shadow: 0 0 5px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.6), 0 0 15px #ff, 0 0 20px rgba(0,0,0,0.6);
-  }
-
-  to {
-    box-shadow: 0 0 10px #ffc107, 0 0 15px #ffc107, 0 0 20px #ffc107, 0 0 25px #ffc107;
-  }
-}
-
-
-
-#login-form input[type=email]:focus, #login-form input[type=password]:focus
-{   
-    border-color:rgba(0,0,0,0.7);
-    box-shadow:none; 
-    background-color: rgba(0,0,0,0.5);
-    animation: glow2 1s ease-in-out infinite alternate;
-    transform: translateZ(0);
-}
-
-#login-form .btn-info, #logout-form .btn-info{
-    background-color: #ffc107;
-    border-color: #ffc107 ;
-    font-family:"Green_Energy";
-    font-weight:bold
-}
-
-#login-form .btn-info:hover, #login-form .btn-info:focus, #logout-form .btn-info:hover {
-    color: #ffc107 !important;
-    background-color: #000 !important;
-    border-color: #ffc107;
-    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 25%);
-}
-
-#createGameForm #createGame {
-    font-family:"Green_Energy";
-    font-size:1.5em;
-    background-color:#000 !important;
-    border-color: #ffc107;
-    color: #ffc107;
-    font-weight:bold;
-    border-radius:5px;
-    box-shadow:0px 0px 5px #000;
-    margin: 0;
-    float: right;
-}
-
-#createGameForm #createGame:hover{
-    background-color:#ffc107 !important;
-    border-color: #ffc107;
-    color: #000;
-    box-shadow:0px 0px 5px #ffc107;
-}
-
-#gamesList .btn-warning, #gamesList .btn-info  {
-    width:150px !important;
-}
-
-#gamesList .btn-warning:hover{
-    font-weight:bold;
-}
-
-#gamesList .btn-info  {
-    background-color:#000;
-    border-color: #ffc107;
-}
-
-#gamesList .btn-info:hover  {
-    background-color:#222;
-    border-color: #ffc107;
-    font-weight:bold;
-}
-
-
-#logout-form {
-    display: inline-block;
-    margin-left: 12px;
-}
-
-.game-view #logout-form {
-    display: inline-block;
-}
-
-.currentPlayerContainer {
-    color:#fff;
-    line-height:2.5em;
-}
-
-
-
-.textCenter.whiteColor h2, #currentPlayer{
-    animation: glow 1s ease-in-out infinite alternate;
-    transform: translateZ(0);
-}
-
-@-webkit-keyframes glow {
-  from {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff, 0 0 20px #fff;
-  }
-
-  to {
-    text-shadow: 0 0 2px #ffc107, 0 0 5px #ffc107, 0 0 8px #ffc107, 0 0 10px #ffc107;
-  }
-}
-
-
-#gamesList thead tr, #scoreBoard thead tr {
-    text-shadow: 0 0 5px #fff;
-}
-
-
-#gamesList thead tr{
-    font-size: 1.3em;
-}
-
-
-#scoreBoard thead tr{
-    font-size: 1.4em;
-}
-
-#scoreBoard {
-    margin-bottom: 20px !important;
-}
-
-.table-dark th, .table-dark thead th:first-child, #scoreBoard > tbody > tr > td:first-child{
-padding-left: 20px;
-}
-
-
-#signupSuccess, #loginSuccess, #logoutSuccess, #gameCreatedSuccess, #gameJoinedSuccess, #okShips, #okSalvo {
-    border: 2px solid #000 !important;
-    background-color: #ffc107 !important;
-    color:#000 !important;
-    font-weight:bolder;
-    margin:10px 0;
-}
-
-#loginFailed, #errorSignup, #errorShips, #errorSalvo {
-    border: 2px solid #000 !important;
-    background-color: indianred;
-    font-weight:bolder;
-    margin:10px 0;
-}
-
-.game-view {
-    background-color:rgba(0,0,0,0.3);
-    min-height: 100vh;
-    /* overflow: initial; */
-}
-
-
-#battleGrids > div.row{
-    margin:30px 0 !important;
-    padding:15px 0;
-}
-
-.bannerTitle {
-    margin: 30px 0 30px 0;
+    margin: 15px auto 0;
     text-align: center;
-    background: none;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.game-view .bannerTitle {
-    margin:0;
+    background: #00000038;
+    border-radius: 20px;
 }
 
 .blockInline {
@@ -287,23 +20,20 @@ padding-left: 20px;
 }
 
 #gameStateBlock {
-    display: inline-block;
+    background-color: #212529;
     padding: 3px;
     margin-bottom: 4px;
-    /* line-height: 54px; */
-    font-size: 14px;
-    /* border-bottom-left-radius: 20px; */
-    /* border-bottom-right-radius: 20px; */
-    font-weight: 200;
+    border-radius: 10px;
 }
 
 .labelGame {
     text-transform: uppercase;
     color: #dee2e6;
-    font-size: 1.4em;
-    font-weight: 200;
+    font-size: 1.6em;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
-
 .labelGameBig {
     color: #f8f9fa;
     font-weight: 600;
@@ -315,13 +45,12 @@ padding-left: 20px;
     margin-top: 10px;
 }
 
-.gridTopLabel, #currentPlayerName, #OpponentPlayerName {
+.gridTopLabel {
     text-transform: uppercase;
-    font-weight: 600;
     margin: 0;
-    color:#ffc107;
-    text-shadow: 2px 2px 5px #000, 0 0 3px #000;;
-    font-size:1.2em;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .shipPoslabel {
@@ -329,27 +58,15 @@ padding-left: 20px;
     color: #ffc107;
 }
 
+.bannerImage {
+    width: 85%;
+    margin-top: 8px;
+}
 
 .bannerImageGames {
     width: 50%;
-    /* margin-top: 8px; */
-    filter: drop-shadow(1px 1px 1px #fff) drop-shadow(2px 2px 5px #000);
+    margin-top: 8px;
 }
-
-.game-view .bannerImageGames {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -57%);
-}
-
-@media (max-width:1367px) {
-    .game-view .bannerImageGames {
-        width:80%;
-    }
-}
-
 
 #loginFailed, #errorSignup, #errorShips, #errorSalvo {
     display: none;
@@ -363,6 +80,7 @@ padding-left: 20px;
     background-color: darkorange;
     color: black;
     padding: 10px;
+    margin: 10px
 }
 
 #errorMsg {
@@ -374,6 +92,7 @@ padding-left: 20px;
     background-color: forestgreen;
     color: white;
     padding: 10px;
+    margin: 10px
 }
 
 #gamesList {
@@ -391,8 +110,12 @@ padding-left: 20px;
     width: 60%;
     margin: 0 auto;
     opacity: 0.9;
+    margin-bottom: 15px;
 }
 
+#currentPlayerName {
+
+}
 
 .shipCell {
     /*background-color: yellowgreen;*/
@@ -400,19 +123,22 @@ padding-left: 20px;
 
 .salvoCell {
     background-image: url(../img/target.png);
-    background-size: cover;
+    background-size: 100%;
+    /* background-color: #87cefa00; */
     color: white;
 }
 
 .salvoCellSelf {
     background-image: url(../img/targetself.png);
-    background-size: cover;
+    background-size: 100%;
+    /* background-color: #87cefa00; */
     color: #888888;
 }
 
 .hitCell {
     background-image: url(../img/hit3.gif);
     background-size: cover;
+    background-position: center;
 }
 
 .verticalCenterFlex {
@@ -425,18 +151,19 @@ padding-left: 20px;
 
 #gamePlayerDetails {
     text-align: center;
-    width: 100%;
-    font-size: 0.8rem;
 }
 
 .textCenter {
     text-align: center;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
-
 
 /*SHIP PLACEMENT*/
 
 #grid1 {
+
 }
 
 .grid-stack-item-content {
@@ -450,53 +177,62 @@ padding-left: 20px;
 
 .carrierHor {
     background-image: url(../img/carrierhor.png);
-    background-size: contain;
+    background-size: 80% 100%;
+    background-position: center;
 }
 
 .carrierVer {
     background-image: url(../img/carrierver.png);
-    background-size: contain;
+    background-size: 100% 80%;
+    background-position: center;
 }
 
 .battleshipHor {
     background-image: url(../img/battleshiphor.png);
-    background-size: contain;
+    background-size: 85% 100%;
+    background-position: center;
 }
 
 .battleshipVer {
     background-image: url(../img/battleshipver.png);
-    background-size: contain;
+    background-size: 100% 85%;
+    background-position: center;
 }
 
 .submarineHor {
     background-image: url(../img/submarinehor.png);
-    background-size: contain;
+    background-size: 66% 100%;
+    background-position: center;
 }
 
 .submarineVer {
     background-image: url(../img/submarinever.png);
-    background-size: contain;
+    background-size: 100% 66%;
+    background-position: center;
 }
 
 .destroyerHor {
     background-image: url(../img/destroyerhor.png);
-    background-size: contain;
+    background-size: 80% 100%;
+    background-position: center;
 }
 
 .destroyerVer {
     background-image: url(../img/destroyerver.png);
-    background-size: contain;
+    background-size: 100% 80%;
+    background-position: center;
 }
 
 .patrolboatHor {
     background-image: url(../img/patrolboathor.png);
-    background-size: contain;
-
+    background-size: 70% 90%;
+    background-position: center;
 }
 
 .patrolboatVer {
     background-image: url(../img/patrolboatver.png);
-    background-size: contain;
+    background-size: 90% 70%;
+    background-position: center;
 }
 
 .sidebar {
@@ -509,15 +245,17 @@ padding-left: 20px;
 .gridShips {
     width: 451px;
     height: 451px;
-    background-image: url(../img/backships.gif);
+    background-image: url(../img/backships.jpg);
     margin: 0 auto;
     background-size: cover;
+    background-position: center;
 }
 
 .backShipPlacement {
-    background-image: url(../img/backshipplacement.gif);
+    background-image: url(../img/backshipplacement.jpg);
+    background-size: cover;
+    background-position: center;
 }
-
 .title {
     text-align: center;
 }
@@ -541,28 +279,31 @@ padding-left: 20px;
 }
 
 .gameStateLabelBig {
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: 600;
     color: #ffc107;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .gameStateLabel {
     color: #dee2e6;
-    /* display: inline-block; */
-    font-weight: 200;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .divTableRow {
     display: table-row;
 }
-
 .divTableHeading {
     background-color: #EEE;
     display: table-header-group;
 }
 
 .divTableCell, .divTableHead {
-    border: 1px dashed #6786ff;
+    border: 1px dashed #545b62;
     border-left-width: 0;
     border-top-width: 0;
     display: table-cell;
@@ -597,9 +338,7 @@ img {
     user-select: none;
 }
 
-img{
-    -webkit-user-drag: none;
-}
+img{-webkit-user-drag: none;}
 
 button:focus {
     outline: none;
@@ -624,13 +363,14 @@ button:focus {
 }
 
 #placingShipsBoard {
-    /* display: none; */
+    display: none;
     background: #000000bf;
     width: 80%;
     margin: 0 auto;
     padding: 25px;
     border-radius: 1.5em;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #gameRecordOppTable, #gameRecordSelfTable {
@@ -640,11 +380,16 @@ button:focus {
 .table td, .table th {
     vertical-align: middle;
     padding: .25rem;
-    font-weight: 200;
+    font-weight: 500;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .3px;
 }
 
 .form-inline > * {
-    margin: 3px 6px !important;
+    margin: 3px 3px;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .3px;
+    font-weight: bold;
 }
 
 #login-form {
@@ -653,14 +398,12 @@ button:focus {
 }
 
 #username, #password {
-    background-color: rgba(255,255,255,0.4);
-    color: #ffc107;
+    background-color: #f8f9fa94;
 }
 
 .whiteColor {
     color: white;
-    margin-top: 30px;
-    margin-bottom:15ppx;
+    margin-top: 10px;
 }
 
 .table th {
@@ -687,14 +430,21 @@ button:focus {
 
 .currentPlayerContainer {
     text-align: center;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 #currentPlayer {
     font-size: 1.2em;
     font-weight: 600;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing:.3px;
+    font-weight: 500;
 }
 
 .placeshipsInstructions {
+
     width: 75%;
     margin: 10px auto 10px;
     font-size: 1.2em;
@@ -755,11 +505,6 @@ button:focus {
 
 #shipsLeftIcons, #shipsLeftIconsOpp {
     margin-bottom: 8px;
-    
-}
-
-#shipsLeftIcons img, #shipsLeftIconsOpp img{
-   filter:drop-shadow(0.25rem 0.25rem 0.3rem rgba(0, 0, 0, 1));
 }
 
 @media (min-width: 930px) {
@@ -768,6 +513,20 @@ button:focus {
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
+    }
+}
+
+@media (max-width: 929px) and (min-width: 576px) {
+    .col-sm-6 {
+
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        -webkit-box-flex: unset;
+        flex: none;
+        max-width: unset;
     }
 }
 
@@ -784,40 +543,26 @@ button:focus {
 }
 
 .selfTable {
-    background-image: url(../img/backshipplacement.gif);
+    background-image: url(../img/backshipplacement.jpg);
+    background-position: center;
     opacity: 0.9;
     color: #888888;
     font-size: 0.8em;
+    margin-bottom: 15px;
 }
 
 .oppTable {
-    background-image: url(../img/backships.gif);
+    background-image: url(../img/backships.jpg);
+    background-position: left;
     opacity: 0.9;
-    color: #d8dce0;
+    color: #545b62;
     font-size: 0.8em;
 }
 
 .selfTdCell {
-    border: 1px dashed #eab105;
+    border: 1px dashed #545b62;
     border-left-width: 0;
     border-top-width: 0;
-}
-
-
-
-
-@media (max-width: 929px) and (min-width: 576px) {
-
-    .col-sm-6 {
-            position: relative;
-            width: 100%;
-            min-height: 1px;
-            padding-right: 15px;
-            padding-left: 15px;
-            -webkit-box-flex: unset;
-            flex: none;
-            max-width: unset;
-        }
 
 }
 

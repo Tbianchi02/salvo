@@ -3,11 +3,7 @@ var gamesData;
 var playersArray;
 var submitButton;
 
-/*
-var input = document.getElementById('username');
-input.oninvalid = function(event) { event.target.setCustomValidity('Name must be a valid email adress, e.g: name@domain.com'); }
-*/
-updateJson(); 
+updateJson();
 
 $(function() {
     $('.submitbutton').click(function () {
@@ -29,7 +25,7 @@ $('#login-form').on('submit', function (event) {
                 // $("#username").val("");
                 $("#password").val("");
                 updateJson();
-                $("#createGameForm").show("slow");
+                $("#createGameForm").show();
 
             })
             .fail(function() {
@@ -164,15 +160,14 @@ function updateView() {
         showScoreBoard(playersArray);
         if (data.player == "Guest") {
             $('#currentPlayer').text(data.player);
-            $('.currentPlayerContainer').hide();
-            $('#logout-form').hide();
+            $('#logout-form').hide("slow");
             $('#login-form').show("slow");
             $("#createGameForm").hide();
 
         } else {
-            $('.currentPlayerContainer').show("slow");
+
             $('#currentPlayer').text(data.player.email);
-            $('#login-form').hide();
+            $('#login-form').hide("slow");
             $('#logout-form').show("slow");
 
         }

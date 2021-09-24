@@ -83,7 +83,6 @@ function refreshGameView(_url) {
             }
 
             if (gamePlayerData.gameState === "WAITINGFOROPP"){
-
                 $('#battleGrids').show('puff', 'slow');
                 waitState = true;
                 setTimeout(
@@ -96,7 +95,6 @@ function refreshGameView(_url) {
             }
 
             if (gamePlayerData.gameState === "WON"){
-                $('#placingShipsBoard').hide();
                 showSelf(gamePlayerData);
                 makeGameRecordTable(gamePlayerData.hits.opponent, "gameRecordOppTable");
                 makeGameRecordTable(gamePlayerData.hits.self, "gameRecordSelfTable");
@@ -105,7 +103,6 @@ function refreshGameView(_url) {
                 console.log("yes you won");
             }
             if (gamePlayerData.gameState === "TIE"){
-                $('#placingShipsBoard').hide();
                 showSelf(gamePlayerData);
                 makeGameRecordTable(gamePlayerData.hits.opponent, "gameRecordOppTable");
                 makeGameRecordTable(gamePlayerData.hits.self, "gameRecordSelfTable");
@@ -114,7 +111,6 @@ function refreshGameView(_url) {
                 console.log("TIED MATCH");
             }
             if (gamePlayerData.gameState === "LOST"){
-                $('#placingShipsBoard').hide();
                 showSelf(gamePlayerData);
                 makeGameRecordTable(gamePlayerData.hits.opponent, "gameRecordOppTable");
                 makeGameRecordTable(gamePlayerData.hits.self, "gameRecordSelfTable");
@@ -123,7 +119,6 @@ function refreshGameView(_url) {
                 console.log("OH YOU LOST");
             }
             if (gamePlayerData.gameState === "WAIT"){
-                $('#placingShipsBoard').hide();
                 $('#battleGrids').show('puff', 'slow');
                 $('#salvoBlock').hide('puff', 'slow');
                 $('#gameRecordBlock').show('puff', 'slow');
@@ -137,7 +132,6 @@ function refreshGameView(_url) {
                     }, 5000);
             }
             if (gamePlayerData.gameState == "PLAY"){
-                $('#placingShipsBoard').hide();
                 showSelf(gamePlayerData);
                 makeGameRecordTable(gamePlayerData.hits.opponent, "gameRecordOppTable");
                 makeGameRecordTable(gamePlayerData.hits.self, "gameRecordSelfTable");
@@ -428,43 +422,43 @@ function makeGameRecordTable (hitsArray, gameRecordTableId) {
     hitsArray.forEach(function (playTurn) {
         let hitsReport = "";
         if (playTurn.damages.carrierHits > 0){
-            hitsReport += "Carrier " + addDamagesIcons(playTurn.damages.carrierHits, "hit") + " ";
+            hitsReport += "Star Destroyer " + addDamagesIcons(playTurn.damages.carrierHits, "hit") + " ";
             if (playTurn.damages.carrier === 5){
-                hitsReport += "SUNK! ";
-                $(playerTag + 'carrierIcon').html('<img src="img/carriersunk.png">');
+                hitsReport += "DEMOLISHED! ";
+                $(playerTag + 'carrierIcon').html('<img src="img/carriersunk.png" width="85" height="50">');
                 shipsAfloat--;
             }
         }
 
         if (playTurn.damages.battleshipHits > 0){
-            hitsReport += "Battleship " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
+            hitsReport += "Millennium Falcon " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
             if (playTurn.damages.battleship === 4){
-                hitsReport += "SUNK! ";
-                $(playerTag + 'battleshipIcon').html('<img src="img/battleshipsunk.png">');
+                hitsReport += "DEMOLISHED! ";
+                $(playerTag + 'battleshipIcon').html('<img src="img/battleshipsunk.png" width="85" height="65">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.submarineHits > 0){
-            hitsReport += "Submarine " + addDamagesIcons(playTurn.damages.submarineHits, "hit") + " ";
+            hitsReport += "X-Wing " + addDamagesIcons(playTurn.damages.submarineHits, "hit") + " ";
             if (playTurn.damages.submarine === 3){
-                hitsReport += "SUNK! ";
-                $(playerTag + 'submarineIcon').html('<img src="img/submarinesunk.png">');
+                hitsReport += "DEMOLISHED! ";
+                $(playerTag + 'submarineIcon').html('<img src="img/submarinesunk.png" width="80" height="50">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.destroyerHits > 0){
-            hitsReport += "Destroyer " + addDamagesIcons(playTurn.damages.destroyerHits, "hit") + " ";
+            hitsReport += "Y-Wing " + addDamagesIcons(playTurn.damages.destroyerHits, "hit") + " ";
             if (playTurn.damages.destroyer === 3){
-                hitsReport += "SUNK! ";
-                $(playerTag + 'destoyerIcon').html('<img src="img/destoyersunk.png">');
+                hitsReport += "DEMOLISHED! ";
+                $(playerTag + 'destoyerIcon').html('<img src="img/destroyersunk.png" width="80" height="55">');
                 shipsAfloat--;
             }
         }
         if (playTurn.damages.patrolboatHits > 0){
-            hitsReport += "Patrol Boat " + addDamagesIcons(playTurn.damages.patrolboatHits, "hit") + " ";
+            hitsReport += "Jedi Starfighter " + addDamagesIcons(playTurn.damages.patrolboatHits, "hit") + " ";
             if (playTurn.damages.patrolboat === 2){
-                hitsReport += "SUNK! ";
-                $(playerTag + 'patrolboatIcon').html('<img src="img/patrolboatsunk.png">');
+                hitsReport += "DEMOLISHED! ";
+                $(playerTag + 'patrolboatIcon').html('<img src="img/patrolboatsunk.png" width="60" height="45">');
                 shipsAfloat--;
             }
         }
